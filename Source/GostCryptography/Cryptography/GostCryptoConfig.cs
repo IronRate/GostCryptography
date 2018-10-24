@@ -235,7 +235,7 @@ namespace GostCryptography.Cryptography
         /// <summary>
         /// Идентификатор типа криптографического провайдера.
         /// </summary>
-        public static int ProviderType { get; set; }
+        public static ProviderTypes ProviderType { get; set; }
 
 
         public static void Initialize()

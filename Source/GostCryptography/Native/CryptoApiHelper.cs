@@ -29,23 +29,23 @@ namespace GostCryptography.Native
             {
                 var providerType = GostCryptoConfig.ProviderType;
 
-                if (!_providerHandles.ContainsKey(providerType))
+                if (!_providerHandles.ContainsKey((int)providerType))
                 {
                     lock (ProviderHandleSync)
                     {
-                        if (!_providerHandles.ContainsKey(providerType))
+                        if (!_providerHandles.ContainsKey((int)providerType))
                         {
-                            var providerParams = new CspParameters(providerType);
+                            var providerParams = new CspParameters((int)providerType);
                             var providerHandle = AcquireProvider(providerParams);
 
                             Thread.MemoryBarrier();
 
-                            _providerHandles.Add(providerType, providerHandle);
+                            _providerHandles.Add((int)providerType, providerHandle);
                         }
                     }
                 }
 
-                return _providerHandles[providerType];
+                return _providerHandles[(int)providerType];
             }
         }
 
@@ -59,23 +59,23 @@ namespace GostCryptography.Native
             {
                 var providerType = GostCryptoConfig.ProviderType;
 
-                if (!_randomNumberGenerators.ContainsKey(providerType))
+                if (!_randomNumberGenerators.ContainsKey((int)providerType))
                 {
                     lock (RandomNumberGeneratorSync)
                     {
-                        if (!_randomNumberGenerators.ContainsKey(providerType))
+                        if (!_randomNumberGenerators.ContainsKey((int)providerType))
                         {
-                            var providerParams = new CspParameters(GostCryptoConfig.ProviderType);
+                            var providerParams = new CspParameters((int)GostCryptoConfig.ProviderType);
                             var randomNumberGenerator = new RNGCryptoServiceProvider(providerParams);
 
                             Thread.MemoryBarrier();
 
-                            _randomNumberGenerators.Add(providerType, randomNumberGenerator);
+                            _randomNumberGenerators.Add((int)providerType, randomNumberGenerator);
                         }
                     }
                 }
 
-                return _randomNumberGenerators[providerType];
+                return _randomNumberGenerators[(int)providerType];
             }
         }
 
@@ -90,7 +90,7 @@ namespace GostCryptography.Native
 
             if (providerParameters == null)
             {
-                providerParameters = new CspParameters(GostCryptoConfig.ProviderType);
+                providerParameters = new CspParameters((int)GostCryptoConfig.ProviderType);
             }
 
             var dwFlags = Constants.CRYPT_VERIFYCONTEXT;
