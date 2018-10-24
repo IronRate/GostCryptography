@@ -2,15 +2,15 @@
 
 using GostCryptography.Native;
 
-namespace GostCryptography.Cryptography
+namespace GostCryptography.Cryptography.GOST2012
 {
     /// <summary>
     /// Реализация алгоритма хэширования в соответствии с ГОСТ Р 34.11-2012, длина выхода 512 бит.
     /// </summary>
-    public class Gost34112012512HashAlgorithm : Gost3411HashAlgorithmBase
+    public class Gost3411_2012_512_HashAlgorithm : Gost3411HashAlgorithmBase
     {
         [SecuritySafeCritical]
-        public Gost34112012512HashAlgorithm()
+        public Gost3411_2012_512_HashAlgorithm()
         {
         }
 

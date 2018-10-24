@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GostCryptography.Cryptography.GOST2012
 {
-    public sealed class Gost3410_2012_256_AsymmentricAlgorithm:Gost3410_2012_256_AsymmetricAlgorithmBase, ICspAsymmetricAlgorithm
+    public sealed class Gost3410_2012_256_AsymmetricAlgorithm:Gost3410_2012_256_AsymmetricAlgorithmBase, ICspAsymmetricAlgorithm
     {
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GostCryptography.Cryptography.GOST2012;
+using System;
 using System.Collections.Generic;
 using System.Security;
 using System.Security.Cryptography;
@@ -134,8 +135,8 @@ namespace GostCryptography.Cryptography
 
             // Реализация алгоритма хэширования по ГОСТ Р 34.11
             AddDefaultNamesToType<Gost3411HashAlgorithm>(Hash3411Name, Hash3411XmlDsigName, "http://www.w3.org/2001/04/xmldsig-more#gostr3411");
-            AddDefaultNamesToType<Gost34112012256HashAlgorithm>(Hash34112012256Name, Hash34112012256XmlDsigName);
-            AddDefaultNamesToType<Gost34112012512HashAlgorithm>(Hash34112012512Name, Hash34112012512XmlDsigName);
+            AddDefaultNamesToType<Gost3411_2012_256_HashAlgorithm>(Hash34112012256Name, Hash34112012256XmlDsigName);
+            AddDefaultNamesToType<Gost3411_2012_512_HashAlgorithm>(Hash34112012512Name, Hash34112012512XmlDsigName);
 
             // Реализация алгоритма симметричного шифрования по ГОСТ 28147
             AddDefaultNamesToType<Gost28147SymmetricAlgorithm>(DefaultEncryptionName);
@@ -197,8 +198,8 @@ namespace GostCryptography.Cryptography
 
             // Реализация алгоритма хэширования по ГОСТ Р 34.11
             AddDefaultNamesToOid<Gost3411HashAlgorithm>(Hash3411Oid, Hash3411Name, Hash3411XmlDsigName, "http://www.w3.org/2001/04/xmldsig-more#gostr3411");
-            AddDefaultNamesToOid<Gost34112012256HashAlgorithm>(Hash34112012256Oid, Hash34112012256Name, Hash34112012256XmlDsigName);
-            AddDefaultNamesToOid<Gost34112012512HashAlgorithm>(Hash34112012512Oid, Hash34112012512Name, Hash34112012512XmlDsigName);
+            AddDefaultNamesToOid<Gost3411_2012_256_HashAlgorithm>(Hash34112012256Oid, Hash34112012256Name, Hash34112012256XmlDsigName);
+            AddDefaultNamesToOid<Gost3411_2012_512_HashAlgorithm>(Hash34112012512Oid, Hash34112012512Name, Hash34112012512XmlDsigName);
 
             // Реализация алгоритма симметричного шифрования по ГОСТ 28147
             AddDefaultNamesToOid<Gost28147SymmetricAlgorithm>(DefaultEncryptionOid, DefaultEncryptionName);
