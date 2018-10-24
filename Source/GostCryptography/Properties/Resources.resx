@@ -375,4 +375,13 @@
   <data name="XmlMissingAlgorithm" xml:space="preserve">
     <value>Symmetric algorithm is not specified.</value>
   </data>
+  <data name="RequiredGost3411_2012" xml:space="preserve">
+    <value>GOST R 34.10 2012 requires GOST R 34.11 2012 hash.</value>
+  </data>
+  <data name="ShouldSupportGost3410_2012_256" xml:space="preserve">
+    <value>Parameter must support GOST R 34.10 2012-256 algorithm.</value>
+  </data>
+  <data name="ShouldSupportGost3410_2012_512" xml:space="preserve">
+    <value>Parameter must support GOST R 34.10 2012-512 algorithm.</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GostCryptography.Properties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -8,6 +9,8 @@ namespace GostCryptography.Cryptography.GOST2012
 {
     public sealed class Gost2012_512_SignatureDeformatter: AsymmetricSignatureDeformatter
     {
+        private Gost3410_2012_512_AsymmetricAlgorithmBase _publicKey;
+
         #region Constructor
 
         public Gost2012_512_SignatureDeformatter()
@@ -22,19 +25,45 @@ namespace GostCryptography.Cryptography.GOST2012
 
         #endregion
 
+
         public override void SetHashAlgorithm(string strName)
         {
-            throw new NotImplementedException();
+
         }
 
-        public override void SetKey(AsymmetricAlgorithm key)
+        public override void SetKey(AsymmetricAlgorithm publicKey)
         {
-            throw new NotImplementedException();
+            if (publicKey == null)
+            {
+                throw new ArgumentNullException(nameof(publicKey));
+            }
+
+            if (!(publicKey is Gost3410_2012_256_AsymmetricAlgorithmBase))
+            {
+                throw ExceptionUtility.ArgumentOutOfRange(nameof(publicKey), Resources.ShouldSupportGost3410_2012_512);
+            }
+
+            _publicKey = (Gost3410_2012_512_AsymmetricAlgorithmBase)publicKey;
+
+
         }
 
-        public override bool VerifySignature(byte[] rgbHash, byte[] rgbSignature)
+        public override bool VerifySignature(byte[] hash, byte[] signature)
         {
-            throw new NotImplementedException();
+            if (hash == null)
+            {
+                throw new ArgumentNullException(nameof(hash));
+            }
+
+            if (signature == null)
+            {
+                throw new ArgumentNullException(nameof(signature));
+            }
+
+            var reverseSignature = (byte[])signature.Clone();
+            Array.Reverse(reverseSignature);
+
+            return _publicKey.VerifySignature(hash, reverseSignature);
         }
 
     }
