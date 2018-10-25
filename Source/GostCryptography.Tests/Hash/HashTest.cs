@@ -16,9 +16,14 @@ namespace GostCryptography.Tests.Hash
     [TestFixture(Description = "Вычисление хэша в соответствии с ГОСТ Р 34.11")]
     public sealed class HashTest
     {
+        public HashTest()
+        {
+            GostCryptography.Cryptography.GostCryptoConfig.ProviderType = Cryptography.ProviderTypes.CryptoPro;
+        }
         [Test]
         public void ShouldComputeHash3411_94()
         {
+
             // Given
             var dataStream = CreateDataStream();
 
@@ -39,6 +44,7 @@ namespace GostCryptography.Tests.Hash
         [Test]
         public void ShouldComputeHash3411_2012_256()
         {
+
             // Given
             var dataStream = CreateDataStream();
 

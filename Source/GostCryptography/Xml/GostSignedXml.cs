@@ -52,12 +52,12 @@ namespace GostCryptography.Xml
         /// <summary>
         /// Наименование алгоритма алгоритма хэширования по ГОСТ Р 34.11.2012-256
         /// </summary>
-        public const string XmlDsigGost34112012256Url = "urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34112012-256";
+        public const string XmlDsigGost3411_2012_256Url = "urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34112012-256";
 
         /// <summary>
         /// Наименование алгоритма алгоритма хэширования по ГОСТ Р 34.11.2012-512
         /// </summary>
-        public const string XmlDsigGost34112012512Url = "urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34112012-512";
+        public const string XmlDsigGost3411_2012_512Url = "urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34112012-512";
 
         /// <summary>
         /// Устаревшее наименование алгоритма алгоритма хэширования по ГОСТ Р 34.11.

@@ -13,21 +13,24 @@ using System.Xml;
 namespace GostCryptography.Tests.Xml.Sign
 {
     [TestFixture(Description = "Подпись и проверка подписи XML-документа с использованием сертификата 2012-256")]
-    public sealed class SignedXmlCertificate2012_256_Test
+    public sealed class SignedXmlCertificate2012_512_Test
     {
         [Test]
         public void ShouldSignXml()
         {
-            GostCryptography.Cryptography.GostCryptoConfig.ProviderType = Cryptography.ProviderTypes.CryptoPro_2012_256;
+            GostCryptography.Cryptography.GostCryptoConfig.ProviderType = Cryptography.ProviderTypes.CryptoPro_2012_512;
             // Given
-            var signingCertificate = TestCertificates.GetCertificate3410_2012_256();
-            var xmlDocument = CreateXmlDocument();
+            var signingCertificate = TestCertificates.GetCertificate3410_2012_512();
+            if (signingCertificate != null)
+            {
+                var xmlDocument = CreateXmlDocument();
 
-            // When
-            var signedXmlDocument = SignXmlDocument(xmlDocument, signingCertificate);
+                // When
+                var signedXmlDocument = SignXmlDocument(xmlDocument, signingCertificate);
 
-            // Then
-            Assert.IsTrue(VerifyXmlDocumentSignature(signedXmlDocument));
+                // Then
+                Assert.IsTrue(VerifyXmlDocumentSignature(signedXmlDocument));
+            }
         }
 
         private static XmlDocument CreateXmlDocument()
@@ -46,7 +49,7 @@ namespace GostCryptography.Tests.Xml.Sign
             signedXml.SetSigningCertificate(signingCertificate);
 
             // Ссылка на узел, который нужно подписать, с указанием алгоритма хэширования
-            var dataReference = new Reference { Uri = "#Id1", DigestMethod = GostSignedXml.XmlDsigGost3411_2012_256Url };
+            var dataReference = new Reference { Uri = "#Id1", DigestMethod = GostSignedXml.XmlDsigGost3411_2012_512Url };
 
             // Установка ссылки на узел
             signedXml.AddReference(dataReference);

@@ -29,12 +29,14 @@ namespace GostCryptography.Tests.Encrypt
 		{
 			var certificate = TestCertificates.GetCertificate3410_2001();
 
+            GostCryptography.Cryptography.GostCryptoConfig.ProviderType = Cryptography.ProviderTypes.CryptoPro;
 			// Отправитель имеет открытый асимметричный ключ для шифрации сессионного ключа
 			_publicKey = certificate.GetPublicKeyAlgorithm();
 
 			// Получатель имеет закрытый асимметричный ключ для дешифрации сессионного ключа
 			_privateKey = certificate.GetPrivateKeyAlgorithm();
-		}
+
+        }
 
 		[TearDown]
 		public void TearDown()

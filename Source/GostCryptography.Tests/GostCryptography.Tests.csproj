@@ -66,6 +66,9 @@
     <Compile Include="Xml\Encrypt\EncryptedXmlBroadcastTest.cs" />
     <Compile Include="Xml\Encrypt\EncryptedXmlCertificateTest.cs" />
     <Compile Include="Xml\Sign\SignedXmlCertificate2012_256_Test.cs" />
+    <Compile Include="Xml\Sign\SignedXmlCertificate2012_512_Test.cs" />
+    <Compile Include="Xml\Sign\SignedXmlDocument2012_256_Test.cs" />
+    <Compile Include="Xml\Sign\SignedXmlDocument2012_512_Test.cs" />
     <Compile Include="Xml\Sign\SignedXmlDocumentTest.cs" />
     <Compile Include="Xml\Sign\SignedXmlSmevTest.cs" />
     <Compile Include="Xml\Sign\SignedXmlTransformTest.cs" />
