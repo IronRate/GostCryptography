@@ -26,7 +26,9 @@ namespace GostCryptography.Tests
 		/// <summary>
 		/// Сертификат ГОСТ Р 34.10-2001 с закрытым ключем.
 		/// </summary>
-		private static readonly X509Certificate2 GostCetificate = FindGostCertificate();
+		private static readonly X509Certificate2 GostCetificate3410_2001 = FindGostCertificate3410_2001();
+
+        private static readonly X509Certificate2 GostCertificate3410_2012_256 = FindGostCertificate3410_2012_512();
 
 
 		/// <summary>
@@ -41,7 +43,7 @@ namespace GostCryptography.Tests
 		/// </remarks>
 		public static CspParameters GetKeyContainer()
 		{
-			return GostCetificate.GetPrivateKeyInfo();
+			return GostCetificate3410_2001.GetPrivateKeyInfo();
 		}
 
 		/// <summary>
@@ -49,11 +51,11 @@ namespace GostCryptography.Tests
 		/// </summary>
 		public static X509Certificate2 GetCertificate()
 		{
-			return GostCetificate;
+			return GostCetificate3410_2001;
 		}
 
 
-		private static X509Certificate2 FindGostCertificate()
+		private static X509Certificate2 FindGostCertificate3410_2001()
 		{
 			// Для тестирования берется первый найденный сертификат ГОСТ с закрытым ключем.
 
@@ -77,5 +79,30 @@ namespace GostCryptography.Tests
 
 			return null;
 		}
-	}
+
+        private static X509Certificate2 FindGostCertificate3410_2012_256()
+        {
+            // Для тестирования берется первый найденный сертификат ГОСТ с закрытым ключем.
+
+            var store = new X509Store(CertStoreName, CertStoreLocation);
+            store.Open(OpenFlags.ReadOnly);
+
+            try
+            {
+                foreach (var certificate in store.Certificates)
+                {
+                    if (certificate.HasPrivateKey && certificate.SignatureAlgorithm.Value == "1.2.643.2.2.3")
+                    {
+                        return certificate;
+                    }
+                }
+            }
+            finally
+            {
+                store.Close();
+            }
+
+            return null;
+        }
+    }
 }

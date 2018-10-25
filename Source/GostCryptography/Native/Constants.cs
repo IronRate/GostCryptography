@@ -159,6 +159,11 @@
         /// </summary>
         public const int PP_SIGNATURE_PIN = 0x21;
 
+        /// <summary>
+        /// Тип провайдера
+        /// </summary>
+        public const uint PP_PROVTYPE = 0x10;
+
         #endregion
 
 
