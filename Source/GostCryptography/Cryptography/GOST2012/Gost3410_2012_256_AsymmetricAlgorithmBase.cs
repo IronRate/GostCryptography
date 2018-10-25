@@ -15,7 +15,7 @@ namespace GostCryptography.Cryptography.GOST2012
         /// <summary>
 		/// Наименование алгоритма цифровой подписи по ГОСТ Р 34.10.
 		/// </summary>
-		public const string Gost3410_2012_256_SignatureAlgorithm = "urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34102012-gostr3411-256";
+		public const string Gost3410_2012_256_SignatureAlgorithm = "urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34102012-gostr34112012-256";
 
         /// <summary>
         /// Наименование алгоритма обмена ключами по ГОСТ Р 34.10.

@@ -21,7 +21,7 @@ namespace GostCryptography.Tests
         /// <remarks>
         /// Значение равно <see cref="StoreLocation.LocalMachine"/>.
         /// </remarks>
-        public const StoreLocation CertStoreLocation = StoreLocation.LocalMachine;
+        public const StoreLocation CertStoreLocation = StoreLocation.CurrentUser;
 
         /// <summary>
         /// Сертификат ГОСТ Р 34.10-2001 с закрытым ключем.

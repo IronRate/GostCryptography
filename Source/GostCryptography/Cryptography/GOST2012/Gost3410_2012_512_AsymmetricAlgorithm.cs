@@ -14,6 +14,9 @@ using System.Text;
 
 namespace GostCryptography.Cryptography.GOST2012
 {
+
+    [SecurityCritical]
+    [SecuritySafeCritical]
     public sealed class Gost3410_2012_512_AsymmetricAlgorithm:Gost3410_2012_512_AsymmetricAlgorithmBase, ICspAsymmetricAlgorithm
     {
         public const int DefaultKeySize = 1024;

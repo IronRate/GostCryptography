@@ -22,6 +22,7 @@ namespace GostCryptography.Tests.Xml.Sign
 		[Test]
 		public void ShouldSignXml()
 		{
+            GostCryptography.Cryptography.GostCryptoConfig.ProviderType = Cryptography.ProviderTypes.CryptoPro;
 			// Given
 			var signingCertificate = TestCertificates.GetCertificate3410_2001();
 			var xmlDocument = CreateXmlDocument();
