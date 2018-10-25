@@ -80,7 +80,7 @@ namespace GostCryptography.Xml
 
 			var encriptionKey = new Gost28147SymmetricAlgorithm();
 			var publicKey = certificate.GetPublicKeyAlgorithm();
-			encryptedKey.CipherData.CipherValue = EncryptKey(encriptionKey, publicKey as Gost3410AsymmetricAlgorithmBase);
+			encryptedKey.CipherData.CipherValue = EncryptKey(encriptionKey, publicKey);
 
 			var encryptedData = new EncryptedData
 								{
@@ -94,7 +94,7 @@ namespace GostCryptography.Xml
 			return encryptedData;
 		}
 
-		public static byte[] EncryptKey(Gost28147SymmetricAlgorithmBase sessionKey, Gost3410AsymmetricAlgorithmBase publicKey)
+		public static byte[] EncryptKey(Gost28147SymmetricAlgorithmBase sessionKey, AsymmetricAlgorithm publicKey)
 		{
 			if (sessionKey == null)
 			{
@@ -278,9 +278,9 @@ namespace GostCryptography.Xml
 								var useOaep = (encryptedKey.EncryptionMethod != null) && (encryptedKey.EncryptionMethod.KeyAlgorithm == XmlEncRSAOAEPUrl);
 								decryptionKey = DecryptKeyClass(encryptedKey.CipherData.CipherValue, (RSA)keyAlgorithm, useOaep, symmetricAlgorithmUri);
 							}
-							else if (keyAlgorithm is Gost3410AsymmetricAlgorithmBase)
+							else if (keyAlgorithm is AsymmetricAlgorithm)
 							{
-								decryptionKey = DecryptKeyClass(encryptedKey.CipherData.CipherValue, (Gost3410AsymmetricAlgorithmBase)keyAlgorithm);
+								decryptionKey = DecryptKeyClass(encryptedKey.CipherData.CipherValue, (AsymmetricAlgorithm)keyAlgorithm);
 							}
 						}
 
@@ -301,9 +301,9 @@ namespace GostCryptography.Xml
 								var useOaep = (encryptedKey.EncryptionMethod != null) && (encryptedKey.EncryptionMethod.KeyAlgorithm == XmlEncRSAOAEPUrl);
 								decryptionKey = DecryptKeyClass(encryptedKey.CipherData.CipherValue, (RSA)privateKey, useOaep, symmetricAlgorithmUri);
 							}
-							else if (privateKey is Gost3410AsymmetricAlgorithmBase)
+							else if (privateKey is AsymmetricAlgorithm)
 							{
-								decryptionKey = DecryptKeyClass(encryptedKey.CipherData.CipherValue, (Gost3410AsymmetricAlgorithmBase)privateKey);
+								decryptionKey = DecryptKeyClass(encryptedKey.CipherData.CipherValue, (AsymmetricAlgorithm)privateKey);
 							}
 						}
 
@@ -423,7 +423,7 @@ namespace GostCryptography.Xml
 			return decryptionKey;
 		}
 
-		public static SymmetricAlgorithm DecryptKeyClass(byte[] keyData, Gost3410AsymmetricAlgorithmBase privateKey)
+		public static SymmetricAlgorithm DecryptKeyClass(byte[] keyData, AsymmetricAlgorithm privateKey)
 		{
 			if (keyData == null)
 			{

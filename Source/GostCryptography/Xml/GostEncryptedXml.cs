@@ -233,7 +233,7 @@ namespace GostCryptography.Xml
 		/// <param name="publicKey">Открытый ключ ГОСТ Р 34.10 для шифрования сессионного ключа.</param>
 		/// <returns>Массив байт, содержащий зашифрованный сессионный ключ.</returns>
 		/// <remarks>Как правило сессионный ключ используется для шифрования данных и в свою очередь так же шифруется.</remarks>
-		public static byte[] EncryptKey(Gost28147SymmetricAlgorithmBase sessionKey, Gost3410AsymmetricAlgorithmBase publicKey)
+		public static byte[] EncryptKey(Gost28147SymmetricAlgorithmBase sessionKey, AsymmetricAlgorithm publicKey)
 		{
 			return GostEncryptedXmlImpl.EncryptKey(sessionKey, publicKey);
 		}
@@ -337,7 +337,7 @@ namespace GostCryptography.Xml
 		/// <param name="privateKey">Закрытый ключ ГОСТ Р 34.10 для расшифровки сессионного ключа.</param>
 		/// <returns>Сессионный ключ.</returns>
 		/// <remarks>Как правило сессионный ключ используется для шифрования данных и в свою очередь так же шифруется.</remarks>
-		public static SymmetricAlgorithm DecryptKey(byte[] keyData, Gost3410AsymmetricAlgorithmBase privateKey)
+		public static SymmetricAlgorithm DecryptKey(byte[] keyData, AsymmetricAlgorithm privateKey)
 		{
 			return GostEncryptedXmlImpl.DecryptKeyClass(keyData, privateKey);
 		}
