@@ -20,7 +20,7 @@ namespace GostCryptography.Tests.Pkcs
 		public void ShouldEncryptAndDecrypt()
 		{
 			// Given
-			var certificate = TestCertificates.GetCertificate();
+			var certificate = TestCertificates.GetCertificate3410_2001();
 			var message = CreateMessage();
 
 			// When

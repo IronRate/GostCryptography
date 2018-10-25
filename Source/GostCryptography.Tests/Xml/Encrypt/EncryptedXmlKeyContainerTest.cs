@@ -36,7 +36,7 @@ namespace GostCryptography.Tests.Xml.Encrypt
 		public void SetUp()
 		{
 			// Получатель извлекает информацию о закрытом ключе из контейнера ключей
-			var keyContainer = TestCertificates.GetKeyContainer();
+			var keyContainer = TestCertificates.GetKeyContainer3410_2001();
 
 			// Получатель формирует закрытый ключ для дешифрации XML
 			var privateKey = new Gost3410AsymmetricAlgorithm(keyContainer);

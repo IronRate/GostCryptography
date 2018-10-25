@@ -22,33 +22,58 @@ namespace GostCryptography.Xml
 	/// </remarks>
 	public sealed class GostSignedXml
 	{
-		/// <summary>
-		/// Наименование алгоритма цифровой подписи по ГОСТ Р 34.10.
-		/// </summary>
-		public const string XmlDsigGost3410Url = "urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34102001-gostr3411";
+        #region Constants
 
-		/// <summary>
-		/// Устаревшее наименование алгоритма цифровой подписи по ГОСТ Р 34.10.
-		/// </summary>
-		public const string XmlDsigGost3410ObsoleteUrl = "http://www.w3.org/2001/04/xmldsig-more#gostr34102001-gostr3411";
+        /// <summary>
+        /// Наименование алгоритма цифровой подписи по ГОСТ Р 34.10.
+        /// </summary>
+        public const string XmlDsigGost3410Url = "urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34102001-gostr3411";
 
-		/// <summary>
-		/// Наименование алгоритма алгоритма хэширования по ГОСТ Р 34.11.
-		/// </summary>
-		public const string XmlDsigGost3411Url = "urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411";
+        /// <summary>
+        /// Устаревшее наименование алгоритма цифровой подписи по ГОСТ Р 34.10.
+        /// </summary>
+        public const string XmlDsigGost3410ObsoleteUrl = "http://www.w3.org/2001/04/xmldsig-more#gostr34102001-gostr3411";
 
-		/// <summary>
-		/// Устаревшее наименование алгоритма алгоритма хэширования по ГОСТ Р 34.11.
-		/// </summary>
-		public const string XmlDsigGost3411ObsoleteUrl = "http://www.w3.org/2001/04/xmldsig-more#gostr3411";
+        /// <summary>
+        /// Наименование алгоритма алгоритма хэширования по ГОСТ Р 34.11.
+        /// </summary>
+        public const string XmlDsigGost3411Url = "urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr3411";
 
-		/// <summary>
-		/// Наименование алгоритма алгоритма хэширования HMAC по ГОСТ Р 34.11.
-		/// </summary>
-		public const string XmlDsigGost3411HmacUrl = "urn:ietf:params:xml:ns:cpxmlsec:algorithms:hmac-gostr3411";
+        /// <summary>
+        /// Алгоритм подписи по ГОСТ Р 34.10-2012-256
+        /// </summary>
+        public const string XmlDsigGost3410_2012_256Url = "urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34102012-gostr34112012-256";
 
+        /// <summary>
+        /// Алгоритм подписи по ГОСТ Р 34.10-2012-512
+        /// </summary>
+        public const string XmlDsigGost3410_2012_512Url = "urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34102012-gostr34112012-512";
 
-		static GostSignedXml()
+        /// <summary>
+        /// Наименование алгоритма алгоритма хэширования по ГОСТ Р 34.11.2012-256
+        /// </summary>
+        public const string XmlDsigGost3411_2012_256Url = "urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34112012-256";
+
+        /// <summary>
+        /// Наименование алгоритма алгоритма хэширования по ГОСТ Р 34.11.2012-512
+        /// </summary>
+        public const string XmlDsigGost3411_2012_512Url = "urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34112012-512";
+
+        /// <summary>
+        /// Устаревшее наименование алгоритма алгоритма хэширования по ГОСТ Р 34.11.
+        /// </summary>
+        public const string XmlDsigGost3411ObsoleteUrl = "http://www.w3.org/2001/04/xmldsig-more#gostr3411";
+
+        /// <summary>
+        /// Наименование алгоритма алгоритма хэширования HMAC по ГОСТ Р 34.11.
+        /// </summary>
+        public const string XmlDsigGost3411HmacUrl = "urn:ietf:params:xml:ns:cpxmlsec:algorithms:hmac-gostr3411";
+
+        #endregion
+
+        #region Constructor
+
+        static GostSignedXml()
 		{
 			GostCryptoConfig.Initialize();
 		}
@@ -78,8 +103,10 @@ namespace GostCryptography.Xml
 			_signedXml = new GostSignedXmlImpl(document);
 		}
 
+        #endregion
 
-		private readonly GostSignedXmlImpl _signedXml;
+
+        private readonly GostSignedXmlImpl _signedXml;
 
 
 		/// <summary>

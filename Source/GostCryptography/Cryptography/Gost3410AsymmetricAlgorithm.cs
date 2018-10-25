@@ -717,7 +717,7 @@ namespace GostCryptography.Cryptography
 
 			if (providerParameters == null)
 			{
-				parameters = new CspParameters(GostCryptoConfig.ProviderType) { Flags = defaultFlags };
+				parameters = new CspParameters((int)GostCryptoConfig.ProviderType) { Flags = defaultFlags };
 			}
 			else
 			{

@@ -25,7 +25,8 @@ namespace GostCryptography.Tests.Encrypt
 		public void SetUp()
 		{
 			_sharedKey = new Gost28147SymmetricAlgorithm();
-		}
+            GostCryptography.Cryptography.GostCryptoConfig.ProviderType = Cryptography.ProviderTypes.CryptoPro;
+        }
 
 		[TearDown]
 		public void TearDown()

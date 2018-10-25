@@ -29,23 +29,23 @@ namespace GostCryptography.Native
             {
                 var providerType = GostCryptoConfig.ProviderType;
 
-                if (!_providerHandles.ContainsKey(providerType))
+                if (!_providerHandles.ContainsKey((int)providerType))
                 {
                     lock (ProviderHandleSync)
                     {
-                        if (!_providerHandles.ContainsKey(providerType))
+                        if (!_providerHandles.ContainsKey((int)providerType))
                         {
-                            var providerParams = new CspParameters(providerType);
+                            var providerParams = new CspParameters((int)providerType);
                             var providerHandle = AcquireProvider(providerParams);
 
                             Thread.MemoryBarrier();
 
-                            _providerHandles.Add(providerType, providerHandle);
+                            _providerHandles.Add((int)providerType, providerHandle);
                         }
                     }
                 }
 
-                return _providerHandles[providerType];
+                return _providerHandles[(int)providerType];
             }
         }
 
@@ -59,23 +59,23 @@ namespace GostCryptography.Native
             {
                 var providerType = GostCryptoConfig.ProviderType;
 
-                if (!_randomNumberGenerators.ContainsKey(providerType))
+                if (!_randomNumberGenerators.ContainsKey((int)providerType))
                 {
                     lock (RandomNumberGeneratorSync)
                     {
-                        if (!_randomNumberGenerators.ContainsKey(providerType))
+                        if (!_randomNumberGenerators.ContainsKey((int)providerType))
                         {
-                            var providerParams = new CspParameters(GostCryptoConfig.ProviderType);
+                            var providerParams = new CspParameters((int)GostCryptoConfig.ProviderType);
                             var randomNumberGenerator = new RNGCryptoServiceProvider(providerParams);
 
                             Thread.MemoryBarrier();
 
-                            _randomNumberGenerators.Add(providerType, randomNumberGenerator);
+                            _randomNumberGenerators.Add((int)providerType, randomNumberGenerator);
                         }
                     }
                 }
 
-                return _randomNumberGenerators[providerType];
+                return _randomNumberGenerators[(int)providerType];
             }
         }
 
@@ -90,7 +90,7 @@ namespace GostCryptography.Native
 
             if (providerParameters == null)
             {
-                providerParameters = new CspParameters(GostCryptoConfig.ProviderType);
+                providerParameters = new CspParameters((int)GostCryptoConfig.ProviderType);
             }
 
             var dwFlags = Constants.CRYPT_VERIFYCONTEXT;
@@ -172,6 +172,19 @@ namespace GostCryptography.Native
             {
                 throw CreateWin32Error();
             }
+        }
+
+        public static uint GetProviderParameterInt(SafeProvHandleImpl providerHandle)
+        {
+            uint providerType = 0;
+            uint providerTypeLen = sizeof(uint);
+            byte[] dwData = new byte[sizeof(uint)];
+
+
+            if (!CryptoApi.CryptGetProvParam(providerHandle, Constants.PP_PROVTYPE, dwData, ref providerTypeLen, 0))
+                throw CreateWin32Error();
+            providerType = BitConverter.ToUInt32(dwData, 0);
+            return providerType;
         }
 
         #endregion
@@ -1112,10 +1125,101 @@ namespace GostCryptography.Native
             }
         }
 
-        private static SafeHashHandleImpl SetupHashAlgorithm(SafeProvHandleImpl providerHandle, byte[] hashValue)
+        /// <summary>
+        /// Настроит алгоритм хэширования на основе хэндла криптопровайдера
+        /// </summary>
+        /// <param name="hProv">хэндл криптопровайдера</param>
+        /// <param name="hashValue">массив байт который либо сдержит расчитанный хэш либо будет содержать после расчета</param>
+        /// <returns>хэндл алгоритма хэширования</returns>
+        private static SafeHashHandleImpl SetupHashAlgorithm(SafeProvHandleImpl hProv, byte[] hashValue)
+        {
+            SafeHashHandleImpl hashHandle = null;
+            ProviderTypes providerType = (ProviderTypes)GetProviderParameterInt(ProviderHandle);
+            switch (providerType)
+            {
+                case ProviderTypes.CryptoPro_2012_256:
+                    hashHandle = SetupHashAlgorithmGOST2012256(hProv, hashValue);
+                    break;
+                case ProviderTypes.CryptoPro_2012_512:
+                    hashHandle = SetupHashAlgorithmGOST2012512(hProv, hashValue);
+                    break;
+                case ProviderTypes.CryptoPro:
+                case ProviderTypes.VipNet:
+                    hashHandle = SetupHashAlgorithm3410(hProv, hashValue);
+                    break;
+            }
+            uint hashLength = 0;
+
+            if (!CryptoApi.CryptGetHashParam(hashHandle, Constants.HP_HASHVAL, null, ref hashLength, 0))
+            {
+                throw CreateWin32Error();
+            }
+
+            if (hashValue.Length != hashLength)
+            {
+                throw ExceptionUtility.CryptographicException(Constants.NTE_BAD_HASH);
+            }
+
+            if (!CryptoApi.CryptSetHashParam(hashHandle, Constants.HP_HASHVAL, hashValue, 0))
+            {
+                throw CreateWin32Error();
+            }
+
+            return hashHandle;
+        }
+
+        private static SafeHashHandleImpl SetupHashAlgorithm3410(SafeProvHandleImpl providerHandle, byte[] hashValue)
         {
             var hashHandle = CreateHash_3411_94(providerHandle);
 
+            uint hashLength = 0;
+
+            if (!CryptoApi.CryptGetHashParam(hashHandle, Constants.HP_HASHVAL, null, ref hashLength, 0))
+            {
+                throw CreateWin32Error();
+            }
+
+            if (hashValue.Length != hashLength)
+            {
+                throw ExceptionUtility.CryptographicException(Constants.NTE_BAD_HASH);
+            }
+
+            if (!CryptoApi.CryptSetHashParam(hashHandle, Constants.HP_HASHVAL, hashValue, 0))
+            {
+                throw CreateWin32Error();
+            }
+
+            return hashHandle;
+        }
+
+
+
+        private static SafeHashHandleImpl SetupHashAlgorithmGOST2012256(SafeProvHandleImpl providerHandle, byte[] hashValue)
+        {
+            var hashHandle = CreateHash_3411_2012_256(providerHandle);
+            uint hashLength = 0;
+
+            if (!CryptoApi.CryptGetHashParam(hashHandle, Constants.HP_HASHVAL, null, ref hashLength, 0))
+            {
+                throw CreateWin32Error();
+            }
+
+            if (hashValue.Length != hashLength)
+            {
+                throw ExceptionUtility.CryptographicException(Constants.NTE_BAD_HASH);
+            }
+
+            if (!CryptoApi.CryptSetHashParam(hashHandle, Constants.HP_HASHVAL, hashValue, 0))
+            {
+                throw CreateWin32Error();
+            }
+
+            return hashHandle;
+        }
+
+        private static SafeHashHandleImpl SetupHashAlgorithmGOST2012512(SafeProvHandleImpl providerHandle, byte[] hashValue)
+        {
+            var hashHandle = CreateHash_3411_2012_512(providerHandle);
             uint hashLength = 0;
 
             if (!CryptoApi.CryptGetHashParam(hashHandle, Constants.HP_HASHVAL, null, ref hashLength, 0))

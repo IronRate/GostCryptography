@@ -2,7 +2,7 @@
 using System.Text;
 
 using GostCryptography.Cryptography;
-
+using GostCryptography.Cryptography.GOST2012;
 using NUnit.Framework;
 
 namespace GostCryptography.Tests.Hash
@@ -16,9 +16,14 @@ namespace GostCryptography.Tests.Hash
     [TestFixture(Description = "Вычисление хэша в соответствии с ГОСТ Р 34.11")]
     public sealed class HashTest
     {
+        public HashTest()
+        {
+            GostCryptography.Cryptography.GostCryptoConfig.ProviderType = Cryptography.ProviderTypes.CryptoPro;
+        }
         [Test]
         public void ShouldComputeHash3411_94()
         {
+
             // Given
             var dataStream = CreateDataStream();
 
@@ -39,6 +44,7 @@ namespace GostCryptography.Tests.Hash
         [Test]
         public void ShouldComputeHash3411_2012_256()
         {
+
             // Given
             var dataStream = CreateDataStream();
 
@@ -46,7 +52,7 @@ namespace GostCryptography.Tests.Hash
 
             byte[] hashValue;
 
-            using (var hash = new Gost34112012256HashAlgorithm())
+            using (var hash = new Gost3411_2012_256_HashAlgorithm())
             {
                 hashValue = hash.ComputeHash(dataStream);
             }
@@ -66,7 +72,7 @@ namespace GostCryptography.Tests.Hash
 
             byte[] hashValue;
 
-            using (var hash = new Gost34112012512HashAlgorithm())
+            using (var hash = new Gost3411_2012_512_HashAlgorithm())
             {
                 hashValue = hash.ComputeHash(dataStream);
             }

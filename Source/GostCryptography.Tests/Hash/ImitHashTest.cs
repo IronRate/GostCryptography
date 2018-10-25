@@ -20,6 +20,11 @@ namespace GostCryptography.Tests.Hash
 	{
 		private Gost28147SymmetricAlgorithmBase _sharedKey;
 
+        public ImitHashTest()
+        {
+            GostCryptography.Cryptography.GostCryptoConfig.ProviderType = Cryptography.ProviderTypes.CryptoPro;
+        }
+
 		[SetUp]
 		public void SetUp()
 		{

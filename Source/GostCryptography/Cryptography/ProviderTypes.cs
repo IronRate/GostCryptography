@@ -3,16 +3,28 @@
 	/// <summary>
 	/// Типы криптографических провайдеров.
 	/// </summary>
-	public static class ProviderTypes
+	public enum ProviderTypes:int
 	{
+        None=0,
+
 		/// <summary>
 		/// Идентификатор типа криптографического провайдера VipNet.
 		/// </summary>
-		public const int VipNet = 2;
+		VipNet = 2,
 
 		/// <summary>
 		/// Идентификатор типа криптографического провайдера CryptoPro.
 		/// </summary>
-		public const int CryptoPro = 75;
+		CryptoPro = 75,
+
+        /// <summary>
+        /// Идентифиактор типа криптографического провайдера CryptoPro 2012 с размером ключа 512 бит
+        /// </summary>
+        CryptoPro_2012_256=80,
+
+        /// <summary>
+        /// Идентифиактор типа криптографического провайдера CryptoPro 2012 с размером ключа 1024 бит
+        /// </summary>
+        CryptoPro_2012_512=81
 	}
 }

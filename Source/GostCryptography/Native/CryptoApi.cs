@@ -43,6 +43,22 @@ namespace GostCryptography.Native
         [DllImport("advapi32.dll", EntryPoint = "CryptSetProvParam", SetLastError = true)]
         public static extern bool CryptSetProvParam2(IntPtr hCryptProv, [In] uint dwParam, [In] byte[] pbData, [In] uint dwFlags);
 
+        /// <summary>
+        /// Вернет параметр криптопровайдера
+        /// </summary>
+        /// <param name="hProv">Идентификатор криптопровайдера</param>
+        /// <param name="dwParam"></param>
+        /// <param name="pbData"></param>
+        /// <param name="dwDataLen"></param>
+        /// <param name="dwFlags"></param>
+        /// <returns></returns>
+        [DllImport("advapi32.dll", SetLastError = true)]
+        public static extern bool CryptGetProvParam([In]SafeProvHandleImpl hProv, [In] uint dwParam, [MarshalAs(UnmanagedType.LPStr)] StringBuilder pbData, ref uint dwDataLen, uint dwFlags);
+
+        [DllImport("advapi32.dll", SetLastError = true)]
+        public static extern bool CryptGetProvParam([In]SafeProvHandleImpl hProv, [In] uint dwParam, [MarshalAs(UnmanagedType.U8)] long pbData, ref uint dwDataLen, uint dwFlags);
+
+
         #endregion
 
 

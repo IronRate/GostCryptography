@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GostCryptography.Cryptography.GOST2012;
+using System;
 using System.Collections.Generic;
 using System.Security;
 using System.Security.Cryptography;
@@ -126,6 +127,28 @@ namespace GostCryptography.Cryptography
 
         private static void InitializeDefaultNameToTypes()
         {
+          
+
+            // Реализация алгоритма симметричного шифрования по ГОСТ 28147
+            AddDefaultNamesToType<Gost28147SymmetricAlgorithm>(DefaultEncryptionName);
+
+            // Реализация функции вычисления имитовставки по ГОСТ 28147
+            AddDefaultNamesToType<Gost28147ImitHashAlgorithm>("Gost28147Imit");
+
+            InitializeDefaultNameToTypes_2001();
+            InitializeDefaultNameToTypes_2012_256();
+            InitializeDefaultNameToTypes_2012_512();
+        }
+
+        private static void InitializeDefaultNameToTypes_2001()
+        {
+
+            // Реализация HMAC на базе алгоритма хэширования по ГОСТ Р 34.11
+            AddDefaultNamesToType<Gost3411Hmac>("urn:ietf:params:xml:ns:cpxmlsec:algorithms:hmac-gostr3411");
+
+            // Реализация алгоритма генерации псевдослучайной последовательности по ГОСТ Р 34.11
+            AddDefaultNamesToType<Gost3411Prf>();
+
             // Информация о свойствах цифровой подписи ГОСТ Р 34.10-2001
             AddDefaultNamesToType<GostSignatureDescription>("http://www.w3.org/2001/04/xmldsig-more#gostr34102001-gostr3411", "urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34102001-gostr3411");
 
@@ -134,20 +157,6 @@ namespace GostCryptography.Cryptography
 
             // Реализация алгоритма хэширования по ГОСТ Р 34.11
             AddDefaultNamesToType<Gost3411HashAlgorithm>(Hash3411Name, Hash3411XmlDsigName, "http://www.w3.org/2001/04/xmldsig-more#gostr3411");
-            AddDefaultNamesToType<Gost34112012256HashAlgorithm>(Hash34112012256Name, Hash34112012256XmlDsigName);
-            AddDefaultNamesToType<Gost34112012512HashAlgorithm>(Hash34112012512Name, Hash34112012512XmlDsigName);
-
-            // Реализация алгоритма симметричного шифрования по ГОСТ 28147
-            AddDefaultNamesToType<Gost28147SymmetricAlgorithm>(DefaultEncryptionName);
-
-            // Реализация функции вычисления имитовставки по ГОСТ 28147
-            AddDefaultNamesToType<Gost28147ImitHashAlgorithm>("Gost28147Imit");
-
-            // Реализация HMAC на базе алгоритма хэширования по ГОСТ Р 34.11
-            AddDefaultNamesToType<Gost3411Hmac>("urn:ietf:params:xml:ns:cpxmlsec:algorithms:hmac-gostr3411");
-
-            // Реализация алгоритма генерации псевдослучайной последовательности по ГОСТ Р 34.11
-            AddDefaultNamesToType<Gost3411Prf>();
 
             // Класс вычисления цифровой подписи по ГОСТ Р 34.10-2001
             AddDefaultNamesToType<GostSignatureFormatter>();
@@ -157,6 +166,30 @@ namespace GostCryptography.Cryptography
 
             // Параметры ключа цифровой подписи ГОСТ Р 34.10
             AddDefaultNamesToType<GostKeyValue>("http://www.w3.org/2000/09/xmldsig# KeyValue/GostKeyValue");
+
+
+        }
+
+        private static void InitializeDefaultNameToTypes_2012_256()
+        {
+            //AddDefaultNamesToType<Gost2012_256_KeyValue>("http://www.w3.org/2000/09/xmldsig# KeyValue/GostKeyValue");
+            AddDefaultNamesToType<Gost2012_256_SignatureDeformatter>();
+            AddDefaultNamesToType<Gost3410_2012_256_AsymmetricAlgorithm>("Gost34102012-256");
+            ////Информация о свойствах цифровой подписи ГОСТ Р 43.10-2012
+            AddDefaultNamesToType<Gost2012_256_SignatureDescription>("http://www.w3.org/2001/04/xmldsig-more#gostr34112012-gostr34112012-256","urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34102012-gostr34112012-256");
+            AddDefaultNamesToType<Gost3411_2012_256_HashAlgorithm>(Hash34112012256Name, Hash34112012256XmlDsigName, "http://www.w3.org/2001/04/xmldsig-more#gostr34112012-256");
+        }
+
+
+        private static void InitializeDefaultNameToTypes_2012_512()
+        {
+            //AddDefaultNamesToType<Gost2012_512_KeyValue>("http://www.w3.org/2000/09/xmldsig# KeyValue/GostKeyValue");
+            AddDefaultNamesToType<Gost3410_2012_512_AsymmetricAlgorithm>("Gost34102012-512");
+            AddDefaultNamesToType<Gost2012_512_SignatureFormatter>();
+            //////Информация о свойствах цифровой подписи ГОСТ Р 43.10-2012
+            AddDefaultNamesToType<Gost2012_512_SignatureDescription>("http://www.w3.org/2001/04/xmldsig-more#gostr34112012-gostr34112012-512", "urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34102012-gostr34112012-512");
+            AddDefaultNamesToType<Gost3411_2012_512_HashAlgorithm>(Hash34112012512Name, Hash34112012512XmlDsigName, "http://www.w3.org/2001/04/xmldsig-more#gostr34112012-512");
+
         }
 
         [SecuritySafeCritical]
@@ -197,11 +230,12 @@ namespace GostCryptography.Cryptography
 
             // Реализация алгоритма хэширования по ГОСТ Р 34.11
             AddDefaultNamesToOid<Gost3411HashAlgorithm>(Hash3411Oid, Hash3411Name, Hash3411XmlDsigName, "http://www.w3.org/2001/04/xmldsig-more#gostr3411");
-            AddDefaultNamesToOid<Gost34112012256HashAlgorithm>(Hash34112012256Oid, Hash34112012256Name, Hash34112012256XmlDsigName);
-            AddDefaultNamesToOid<Gost34112012512HashAlgorithm>(Hash34112012512Oid, Hash34112012512Name, Hash34112012512XmlDsigName);
+            AddDefaultNamesToOid<Gost3411_2012_256_HashAlgorithm>(Hash34112012256Oid, Hash34112012256Name, Hash34112012256XmlDsigName, "http://www.w3.org/2001/04/xmldsig-more#gostr34112012-256");
+            AddDefaultNamesToOid<Gost3411_2012_512_HashAlgorithm>(Hash34112012512Oid, Hash34112012512Name, Hash34112012512XmlDsigName, "http://www.w3.org/2001/04/xmldsig-more#gostr34112012-512");
 
             // Реализация алгоритма симметричного шифрования по ГОСТ 28147
             AddDefaultNamesToOid<Gost28147SymmetricAlgorithm>(DefaultEncryptionOid, DefaultEncryptionName);
+
         }
 
         [SecuritySafeCritical]
@@ -235,7 +269,7 @@ namespace GostCryptography.Cryptography
         /// <summary>
         /// Идентификатор типа криптографического провайдера.
         /// </summary>
-        public static int ProviderType { get; set; }
+        public static ProviderTypes ProviderType { get; set; }
 
 
         public static void Initialize()

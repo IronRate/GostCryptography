@@ -22,8 +22,9 @@ namespace GostCryptography.Tests.Xml.Sign
 		[Test]
 		public void ShouldSignXml()
 		{
-			// Given
-			var keyContainer = TestCertificates.GetKeyContainer();
+            GostCryptography.Cryptography.GostCryptoConfig.ProviderType = Cryptography.ProviderTypes.CryptoPro;
+            // Given
+            var keyContainer = TestCertificates.GetKeyContainer3410_2001();
 			var signingKey = new Gost3410AsymmetricAlgorithm(keyContainer);
 			var xmlDocument = CreateXmlDocument();
 

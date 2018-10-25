@@ -134,9 +134,21 @@
     <Compile Include="Asn1\PKI\Explicit88\Gost94PubKeyType.cs" />
     <Compile Include="Asn1\PKI\Explicit88\GostR341194DigestParamsType.cs" />
     <Compile Include="Asn1\PKI\Explicit88\PkiConstants.cs" />
-    <Compile Include="Cryptography\Gost34112012512HashAlgorithm.cs" />
+    <Compile Include="Cryptography\GOST2012\Gost2012_256_KeyValue.cs" />
+    <Compile Include="Cryptography\GOST2012\Gost2012_256_SignatureDeformatter.cs" />
+    <Compile Include="Cryptography\GOST2012\Gost2012_256_SignatureDescription.cs" />
+    <Compile Include="Cryptography\GOST2012\Gost2012_256_SignatureFormatter.cs" />
+    <Compile Include="Cryptography\GOST2012\Gost2012_512_KeyValue.cs" />
+    <Compile Include="Cryptography\GOST2012\Gost2012_512_SignatureDeformatter.cs" />
+    <Compile Include="Cryptography\GOST2012\Gost2012_512_SignatureDescription.cs" />
+    <Compile Include="Cryptography\GOST2012\Gost2012_512_SignatureFormatter.cs" />
+    <Compile Include="Cryptography\GOST2012\Gost3410_2012_256_AsymmetricAlgorithm.cs" />
+    <Compile Include="Cryptography\GOST2012\Gost3410_2012_256_AsymmetricAlgorithmBase.cs" />
+    <Compile Include="Cryptography\GOST2012\Gost3410_2012_512_AsymmetricAlgorithm.cs" />
+    <Compile Include="Cryptography\GOST2012\Gost3410_2012_512_AsymmetricAlgorithmBase.cs" />
+    <Compile Include="Cryptography\GOST2012\Gost3411_2012_512_HashAlgorithm.cs" />
     <Compile Include="Cryptography\Gost3411Prf.cs" />
-    <Compile Include="Cryptography\Gost34112012256HashAlgorithm.cs" />
+    <Compile Include="Cryptography\GOST2012\Gost3411_2012_256_HashAlgorithm.cs" />
     <Compile Include="Cryptography\GostKeyValue.cs" />
     <Compile Include="Cryptography\GostSignatureDescription.cs" />
     <Compile Include="Cryptography\ProviderTypes.cs" />
@@ -196,6 +208,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

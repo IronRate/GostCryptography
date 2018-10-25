@@ -29,7 +29,7 @@ namespace GostCryptography.Tests.Xml.Encrypt
 		public void ShouldEncryptXml()
 		{
 			// Given
-			var certificates = new[] { TestCertificates.GetCertificate() };
+			var certificates = new[] { TestCertificates.GetCertificate3410_2001() };
 			var xmlDocument = CreateXmlDocument();
 			var expectedXml = xmlDocument.OuterXml;
 
