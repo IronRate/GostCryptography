@@ -618,7 +618,7 @@ namespace GostCryptography.Cryptography.GOST2012
                 var keyAlgIdInverted = CryptoApiHelper.GetKeyParameter(resultKeyHandle, Constants.KP_ALGID);
                 var keyAlgId = keyAlgIdInverted[0] | (keyAlgIdInverted[1] << 8) | (keyAlgIdInverted[2] << 16) | (keyAlgIdInverted[3] << 24);
 
-                if ((keyAlgId != Constants.CALG_DH_EL_SF) && (keyAlgId != Constants.CALG_GR3410EL) && (keyAlgId!=Constants.CALG_DH_GR3410_2012_256_SF))
+                if ((keyAlgId != Constants.CALG_DH_EL_SF) && (keyAlgId != Constants.CALG_GR3410EL) && (keyAlgId != Constants.CALG_GR3410_2012_256))
                 {
                     throw ExceptionUtility.NotSupported(Resources.KeyAlgorithmNotSupported);
                 }

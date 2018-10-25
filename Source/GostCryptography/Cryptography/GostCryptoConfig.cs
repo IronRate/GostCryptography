@@ -135,8 +135,9 @@ namespace GostCryptography.Cryptography
 
             // Реализация алгоритма хэширования по ГОСТ Р 34.11
             AddDefaultNamesToType<Gost3411HashAlgorithm>(Hash3411Name, Hash3411XmlDsigName, "http://www.w3.org/2001/04/xmldsig-more#gostr3411");
-            AddDefaultNamesToType<Gost3411_2012_256_HashAlgorithm>(Hash34112012256Name, Hash34112012256XmlDsigName);
-            AddDefaultNamesToType<Gost3411_2012_512_HashAlgorithm>(Hash34112012512Name, Hash34112012512XmlDsigName);
+            AddDefaultNamesToType<Gost3411_2012_256_HashAlgorithm>(Hash34112012256Name, Hash34112012256XmlDsigName, "http://www.w3.org/2001/04/xmldsig-more#gostr34112012-256");
+            AddDefaultNamesToType<Gost3411_2012_512_HashAlgorithm>(Hash34112012512Name, Hash34112012512XmlDsigName, "http://www.w3.org/2001/04/xmldsig-more#gostr34112012-512");
+
 
             // Реализация алгоритма симметричного шифрования по ГОСТ 28147
             AddDefaultNamesToType<Gost28147SymmetricAlgorithm>(DefaultEncryptionName);
@@ -158,6 +159,17 @@ namespace GostCryptography.Cryptography
 
             // Параметры ключа цифровой подписи ГОСТ Р 34.10
             AddDefaultNamesToType<GostKeyValue>("http://www.w3.org/2000/09/xmldsig# KeyValue/GostKeyValue");
+            AddDefaultNamesToType<Gost2012_256_KeyValue>("http://www.w3.org/2000/09/xmldsig# KeyValue/GostKeyValue");
+            AddDefaultNamesToType<Gost2012_512_KeyValue>("http://www.w3.org/2000/09/xmldsig# KeyValue/GostKeyValue");
+
+            //Информация о свойствах цифровой подписи ГОСТ Р 43.10-2012
+            AddDefaultNamesToType<Gost2012_256_SignatureDescription>("http://www.w3.org/2001/04/xmldsig-more#gostr34112012-gostr3411", "urn:ietf:params:xml:ns:cpxmlsec:algorithms:gostr34102012-gostr34112012-256");
+
+            AddDefaultNamesToType<Gost2012_256_SignatureDeformatter>();
+
+            AddDefaultNamesToType<Gost2012_256_SignatureFormatter>();
+
+            AddDefaultNamesToType<Gost3410_2012_256_AsymmetricAlgorithm>("Gost34102012");
         }
 
         [SecuritySafeCritical]
@@ -198,11 +210,12 @@ namespace GostCryptography.Cryptography
 
             // Реализация алгоритма хэширования по ГОСТ Р 34.11
             AddDefaultNamesToOid<Gost3411HashAlgorithm>(Hash3411Oid, Hash3411Name, Hash3411XmlDsigName, "http://www.w3.org/2001/04/xmldsig-more#gostr3411");
-            AddDefaultNamesToOid<Gost3411_2012_256_HashAlgorithm>(Hash34112012256Oid, Hash34112012256Name, Hash34112012256XmlDsigName);
-            AddDefaultNamesToOid<Gost3411_2012_512_HashAlgorithm>(Hash34112012512Oid, Hash34112012512Name, Hash34112012512XmlDsigName);
+            AddDefaultNamesToOid<Gost3411_2012_256_HashAlgorithm>(Hash34112012256Oid, Hash34112012256Name, Hash34112012256XmlDsigName, "http://www.w3.org/2001/04/xmldsig-more#gostr34112012-256");
+            AddDefaultNamesToOid<Gost3411_2012_512_HashAlgorithm>(Hash34112012512Oid, Hash34112012512Name, Hash34112012512XmlDsigName, "http://www.w3.org/2001/04/xmldsig-more#gostr34112012-512");
 
             // Реализация алгоритма симметричного шифрования по ГОСТ 28147
             AddDefaultNamesToOid<Gost28147SymmetricAlgorithm>(DefaultEncryptionOid, DefaultEncryptionName);
+
         }
 
         [SecuritySafeCritical]

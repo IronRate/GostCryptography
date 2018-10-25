@@ -134,9 +134,11 @@
     <Compile Include="Asn1\PKI\Explicit88\Gost94PubKeyType.cs" />
     <Compile Include="Asn1\PKI\Explicit88\GostR341194DigestParamsType.cs" />
     <Compile Include="Asn1\PKI\Explicit88\PkiConstants.cs" />
+    <Compile Include="Cryptography\GOST2012\Gost2012_256_KeyValue.cs" />
     <Compile Include="Cryptography\GOST2012\Gost2012_256_SignatureDeformatter.cs" />
     <Compile Include="Cryptography\GOST2012\Gost2012_256_SignatureDescription.cs" />
     <Compile Include="Cryptography\GOST2012\Gost2012_256_SignatureFormatter.cs" />
+    <Compile Include="Cryptography\GOST2012\Gost2012_512_KeyValue.cs" />
     <Compile Include="Cryptography\GOST2012\Gost2012_512_SignatureDeformatter.cs" />
     <Compile Include="Cryptography\GOST2012\Gost2012_512_SignatureDescription.cs" />
     <Compile Include="Cryptography\GOST2012\Gost2012_512_SignatureFormatter.cs" />
