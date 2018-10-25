@@ -27,7 +27,7 @@ namespace GostCryptography.Tests.Encrypt
 		[SetUp]
 		public void SetUp()
 		{
-			var certificate = TestCertificates.GetCertificate();
+			var certificate = TestCertificates.GetCertificate3410_2001();
 
 			// Отправитель имеет открытый асимметричный ключ для шифрации сессионного ключа
 			_publicKey = certificate.GetPublicKeyAlgorithm();
