@@ -55,6 +55,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="PublicKey\GetPublicKeyTest.cs" />
     <Compile Include="Sign\SignDataStreamSignatureDescriptionTest.cs" />
     <Compile Include="Sign\SignDataStreamSignatureFormatterTest.cs" />
     <Compile Include="Sign\SignDataStreamCertificateTest.cs" />

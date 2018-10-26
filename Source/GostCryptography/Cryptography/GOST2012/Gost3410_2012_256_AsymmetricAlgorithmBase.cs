@@ -20,7 +20,7 @@ namespace GostCryptography.Cryptography.GOST2012
         /// <summary>
         /// Наименование алгоритма обмена ключами по ГОСТ Р 34.10.
         /// </summary>
-        public const string Gost3410_2012_256_KeyExchangeAlgorithm = "urn:ietf:params:xml:ns:cpxmlsec:algorithms:transport-gost2012";
+        public const string Gost3410_2012_256_KeyExchangeAlgorithm = "urn:ietf:params:xml:ns:cpxmlsec:algorithms:transport-gost2012-256";
 
 
         /// <summary>
